@@ -14,7 +14,7 @@ import static setup.PermanentSetup.*;
 @Data
 public class QueryUrlFactory {
 
-    File configFile = new File("src/main/resources/querySetup.properties");
+    File configFile = new File("querySetup.properties");
     QuerySetup querySetup;                                   //exception
     PermanentSetup prefix;
     StringBuilder stringBuilder = new StringBuilder(BASE_URL.toString());
