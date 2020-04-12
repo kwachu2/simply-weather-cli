@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.cli.*;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 @Slf4j
@@ -75,6 +76,13 @@ public class OptionCli {
 
     public void helpBuild() {
         HelpFormatter formatter = new HelpFormatter();
+        formatter.setWidth(120);
+        formatter.setOptionComparator(new Comparator<Option>() {
+            @Override
+            public int compare(Option opt1, Option opt2) {
+                return opt1.getOpt().compareTo(opt2.getOpt());
+            }
+        });
         formatter.printHelp("Options ", optionsBuild(), true);
     }
 
