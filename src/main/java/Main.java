@@ -2,6 +2,7 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.extern.slf4j.Slf4j;
@@ -22,10 +23,10 @@ public class Main {
                 optionCli.helpBuild();
             } else {
                 String queryUrl = optionCli.optionBuildQuery();
+                System.out.println(queryUrl);
                 ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
-                HttpResponse<String> httpResponse = Unirest.get(queryUrl).asString();
-                String response = httpResponse.getBody();
-                ResponseModel responseModel = mapper.readValue(response, ResponseModel.class);
+                HttpResponse<JsonNode> httpResponse = Unirest.get(queryUrl).asJson();
+                ResponseModel responseModel = mapper.readValue(httpResponse.getRawBody(), ResponseModel.class);
                 PrintWeather printWeather = new PrintWeather(responseModel);
 
                 if (optionCli.getDataTime() != null) {
@@ -33,7 +34,7 @@ public class Main {
                 } else if (responseModel.getList() != null) {
                     printWeather.printAvailableForecastDataTimes();
                 } else {
-                    printWeather.printCustomWeather();
+                    printWeather.printCurrentWeather();
                 }
             }
         } catch (UnirestException | IOException | RuntimeException e) {

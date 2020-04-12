@@ -93,12 +93,12 @@ public class OptionCli {
             for (String arg : cmd.getArgList()) {
                 stringBuilder.append("+").append(arg);
             }
-            return new QueryUrlFactory("C").buildQueryByNameCity(stringBuilder.toString());
+            return new QueryUrlBuilder("C").buildQueryByNameCity(stringBuilder.toString());
         }
 
         if (cmd.hasOption("C") && cmd.hasOption("g")) {
             List<String> values = Arrays.asList(cmd.getOptionValues("g"));
-            return new QueryUrlFactory("C").buildQueryByCoord(values.get(0), values.get(1));
+            return new QueryUrlBuilder("C").buildQueryByCoord(values.get(0), values.get(1));
         }
 
         //Forecast
@@ -108,13 +108,13 @@ public class OptionCli {
             for (String arg : cmd.getArgList()) {
                 stringBuilder.append("+").append(arg);
             }
-            return new QueryUrlFactory("F").buildQueryByNameCity(stringBuilder.toString());
+            return new QueryUrlBuilder("F").buildQueryByNameCity(stringBuilder.toString());
         }
 
         if (cmd.hasOption("F") && cmd.hasOption("g")) {
             this.dataTime = cmd.getOptionValue("F");
             List<String> values = Arrays.asList(cmd.getOptionValues("g"));
-            return new QueryUrlFactory("F").buildQueryByCoord(values.get(0), values.get(1));
+            return new QueryUrlBuilder("F").buildQueryByCoord(values.get(0), values.get(1));
         }
         return Arrays.toString(this.arguments);
     }

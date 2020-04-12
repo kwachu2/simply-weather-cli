@@ -8,13 +8,13 @@ import model.ResponseModel;
 @Data
 public class PrintWeather {
 
-    private ResponseModel responseModel;
+    private final ResponseModel responseModel;
 
     public PrintWeather(ResponseModel responseModel) {
         this.responseModel = responseModel;
     }
 
-    public void printCustomWeather() {
+    public void printCurrentWeather() {
         System.out.println(this.responseModel);
     }
 
