@@ -1,6 +1,5 @@
 package service;
 
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import setup.PermanentSetup;
 import setup.QuerySetup;
@@ -11,16 +10,14 @@ import java.io.IOException;
 import static setup.PermanentSetup.*;
 
 @Slf4j
-@Data
-public class QueryUrlFactory {
+public class QueryUrlBuilder {
 
-    File configFile = new File("querySetup.properties");
-    QuerySetup querySetup;                                   //exception
-    PermanentSetup prefix;
-    StringBuilder stringBuilder = new StringBuilder(BASE_URL.toString());
+    private final File configFile = new File("querySetup.properties");
+    private QuerySetup querySetup;
+    private PermanentSetup prefix;
 
 
-    public QueryUrlFactory(String prefix) {
+    public QueryUrlBuilder(String prefix) {
         try {
             this.querySetup = new QuerySetup(configFile);
         } catch (IOException e) {
@@ -33,35 +30,31 @@ public class QueryUrlFactory {
         }
     }
 
-    String buildQueryByNameCity(String optionValue) {
-        stringBuilder
+    StringBuilder queryBase() {
+        return new StringBuilder(String.valueOf(BASE_URL))
                 .append(prefix)
                 .append(QUESTION_MARK)
-                .append(PREFIX_CITY_NAME)
-                .append(optionValue)
-                .append(AND)
                 .append(querySetup.getQueryApiKey())
                 .append(AND)
                 .append(querySetup.getQueryUnits())
                 .append(AND)
-                .append(querySetup.getQueryLanguage());
-        return stringBuilder.toString();
+                .append(querySetup.getQueryLanguage())
+                .append(AND);
+    }
+
+    String buildQueryByNameCity(String optionValue) {
+        return queryBase()
+                .append(PREFIX_CITY_NAME)
+                .append(optionValue)
+                .toString();
     }
 
     String buildQueryByCoord(String lat, String lon) {
-        stringBuilder
-                .append(prefix)
-                .append(QUESTION_MARK)
+        return queryBase()
                 .append(PREFIX_LATITUDE).append(lat)
                 .append(AND)
                 .append(PREFIX_LONGITUDE).append(lon)
-                .append(AND)
-                .append(querySetup.getQueryApiKey())
-                .append(AND)
-                .append(querySetup.getQueryUnits())
-                .append(AND)
-                .append(querySetup.getQueryLanguage());
-        return stringBuilder.toString();
+                .toString();
     }
 }
 
