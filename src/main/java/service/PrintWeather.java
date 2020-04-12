@@ -18,15 +18,15 @@ public class PrintWeather {
         System.out.println(this.responseModel);
     }
 
-    public void searchAndPrintWeatherForDataTime(String dataTime) {
+    public void printWeatherForDateTime(String dateTime) {
         for (List search : this.responseModel.getList()) {
-            if (FormatDate.unixToLocalDateString(search.getDt()).equals(dataTime)) {
+            if (FormatDate.unixToLocalDateString(search.getDt()).equals(dateTime)) {
                 System.out.println(search.toString() + this.responseModel.getCity());
             }
         }
     }
 
-    public void printAvailableForecastDataTimes() {
+    public void printAvailableForecastDateTimes() {
         for (List search : this.responseModel.getList()) {
             System.out.println(FormatDate.unixToLocalDateString(search.getDt()));
         }

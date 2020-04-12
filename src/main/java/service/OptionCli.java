@@ -11,9 +11,9 @@ import java.util.List;
 @Slf4j
 @Data
 public class OptionCli {
-    private String[] arguments;
+    private final String[] arguments;
     private String dataTime;
-    private CommandLineParser parser;
+    private final CommandLineParser parser;
     private Options options;
     private CommandLine cmd;
 
@@ -29,7 +29,7 @@ public class OptionCli {
     }
 
     private Options optionsBuild() {
-        this.options = new Options();
+        options = new Options();
 
         this.options.addOption(Option.builder("h")
                 .longOpt("help")
@@ -71,10 +71,10 @@ public class OptionCli {
                 .required(false)
                 .build());
 
-        return this.options;
+        return options;
     }
 
-    public void helpBuild() {
+    public void printHelp() {
         HelpFormatter formatter = new HelpFormatter();
         formatter.setWidth(120);
         formatter.setOptionComparator(new Comparator<Option>() {

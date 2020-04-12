@@ -2,27 +2,18 @@ package service;
 
 import lombok.extern.slf4j.Slf4j;
 import setup.PermanentSetup;
-import setup.QuerySetup;
-
-import java.io.File;
-import java.io.IOException;
+import setup.QueryProperties;
 
 import static setup.PermanentSetup.*;
 
 @Slf4j
 public class QueryUrlBuilder {
 
-    private final File configFile = new File("querySetup.properties");
-    private QuerySetup querySetup;
+    private final QueryProperties queryProperties;
     private PermanentSetup prefix;
 
-
     public QueryUrlBuilder(String prefix) {
-        try {
-            this.querySetup = new QuerySetup(configFile);
-        } catch (IOException e) {
-            this.querySetup = new QuerySetup();
-        }
+        this.queryProperties = new QueryProperties();
         if (prefix.equals("C")) {
             this.prefix = PREFIX_CURRENT_WEATHER;
         } else if (prefix.equals("F")) {
@@ -34,11 +25,11 @@ public class QueryUrlBuilder {
         return new StringBuilder(String.valueOf(BASE_URL))
                 .append(prefix)
                 .append(QUESTION_MARK)
-                .append(querySetup.getQueryApiKey())
+                .append(queryProperties.getQueryApiKey())
                 .append(AND)
-                .append(querySetup.getQueryUnits())
+                .append(queryProperties.getQueryUnits())
                 .append(AND)
-                .append(querySetup.getQueryLanguage())
+                .append(queryProperties.getQueryLanguage())
                 .append(AND);
     }
 

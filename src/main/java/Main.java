@@ -20,7 +20,7 @@ public class Main {
 
         try {
             if (optionCli.getCmd().hasOption("h") || optionCli.getCmd().getOptions().length < 1) {
-                optionCli.helpBuild();
+                optionCli.printHelp();
             } else {
                 String queryUrl = optionCli.optionBuildQuery();
                 System.out.println(queryUrl);
@@ -30,9 +30,9 @@ public class Main {
                 PrintWeather printWeather = new PrintWeather(responseModel);
 
                 if (optionCli.getDataTime() != null) {
-                    printWeather.searchAndPrintWeatherForDataTime(optionCli.getDataTime());
+                    printWeather.printWeatherForDateTime(optionCli.getDataTime());
                 } else if (responseModel.getList() != null) {
-                    printWeather.printAvailableForecastDataTimes();
+                    printWeather.printAvailableForecastDateTimes();
                 } else {
                     printWeather.printCurrentWeather();
                 }
