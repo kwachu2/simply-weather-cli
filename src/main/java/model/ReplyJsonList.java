@@ -1,12 +1,13 @@
 package model;
 
 import lombok.Data;
+import java.util.List;
 
 @Data
-public class List {
+public class ReplyJsonList {
     private long dt;
     private MainModel main;
-    private java.util.List<Weather> weather;
+    private List<Weather> weather;
     private Clouds clouds;
     private Wind wind;
     private Rain rain;

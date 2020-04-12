@@ -1,7 +1,7 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-
 import java.util.List;
 
 @Data
@@ -24,7 +24,8 @@ public class ResponseModel {
     //Forecast
     private String message;
     private int cnt;
-    private List<model.List> list;
+    @JsonProperty("list")
+    private List<ReplyJsonList> replyJsonList;
     private City city;
 
 

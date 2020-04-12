@@ -31,7 +31,7 @@ public class Main {
 
                 if (optionCli.getDataTime() != null) {
                     printWeather.printWeatherForDateTime(optionCli.getDataTime());
-                } else if (responseModel.getList() != null) {
+                } else if (responseModel.getReplyJsonList() != null) {
                     printWeather.printAvailableForecastDateTimes();
                 } else {
                     printWeather.printCurrentWeather();
