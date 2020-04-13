@@ -1,5 +1,5 @@
 # simply-weather-cli
-
+##### A simple command line application that displays the weather in text form.
 ![](https://www.seekpng.com/png/full/54-541679_lightning-thunderstorm-png-png-images-storm-clouds-transparent.png)
 
 ## Installation
@@ -23,19 +23,18 @@ $ java -jar simply-weather-cli-0.0.1.jar -h
 
 ### Options
 
-| Option | Arguments | Description |
-| ------ | ------ | ------ |
-| -h, --help | no arguments | Display help menu 
-| -C, --current | no arguments | Set if you want to know the current weather 
-| -F, --forecast  | no arguments | Set to print available forecast dates and times
-| -F, --forecast  | < "yyyy-MM-dd HH:mm:ss" > | Set this to view the forecast
-| -c, --city | < city name > | Enter the name of the city you are looking for
-| -g, --geo | < latitude longitude > | Set to search by geographic coordinates
+| Option | Arguments | Necessary combination | Description |
+| ------ | ------ | ------ | ------ |
+| -h, --help | no arguments | no options | Display help menu 
+| -F, --forecast  | no arguments | -c, --city OR -g, --geo | Set to print available forecast dates and times
+| -F, --forecast  | < "yyyy-MM-dd HH:mm:ss" > | -c, --city OR -g, --geo| Set this to view the forecast
+| -c, --city | < city name > |no options OR -F, --forecast |Enter the name of the city you are looking for
+| -g, --geo | < latitude longitude > |no options OR -F, --forecast| Set to search by geographic coordinates
 
 ### Examples  
-- ```java -jar simply-weather-cli-0.0.1.jar -C -c Warsaw```  
+- ```java -jar simply-weather-cli-0.0.1.jar -c Warsaw```  
 will display the current weather for Warsaw.  
-- ```java -jar simply-weather-cli-0.0.1.jar -C -g 52.23 21.01```  
+- ```java -jar simply-weather-cli-0.0.1.jar -g 52.23 21.01```  
 will display the current weather for Warsaw, but the search will be based on geographical coordinates.  
 - ```java -jar simply-weather-cli-0.0.1.jar -F -c Warsaw```  
 will print out available dates and times of forecasts for Warsaw.  
