@@ -8,6 +8,7 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.extern.slf4j.Slf4j;
 import model.Response;
+import org.apache.commons.cli.MissingArgumentException;
 
 import java.io.IOException;
 
@@ -21,24 +22,15 @@ public class HttpWeatherClient {
     }
 
     public Response getWeather() {
-
-        String queryUrl = optionCli.optionBuildQuery();
-        System.out.println(queryUrl);
         ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
         HttpResponse<JsonNode> httpResponse = null;
         try {
-            httpResponse = Unirest.get(queryUrl).asJson();
-        } catch (UnirestException e) {
-            log.info("\tInvalid or incomplete parameters. \n\tFor help, type -h or --help", e.getMessage());
+            httpResponse = Unirest.get(optionCli.optionBuildQuery()).asJson();
+            Response response = mapper.readValue(httpResponse.getRawBody(), Response.class);
+            return response;
+        } catch (IOException | UnirestException | MissingArgumentException e) {
+            log.info("Invalid or incomplete parameters. \n\tFor help, type -h or --help");
         }
-        Response response = null;
-        try {
-            response = mapper.readValue(httpResponse.getRawBody(), Response.class);
-        } catch (IOException | NullPointerException e) {
-            log.info("\tInvalid or incomplete parameters. \n\tFor help, type -h or --help", e.getMessage());
-        }
-        return response;
+        throw new NullPointerException();
     }
-
-
 }

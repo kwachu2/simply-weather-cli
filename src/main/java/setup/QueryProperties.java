@@ -5,13 +5,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-import static setup.PermanentSetup.*;
-
 public class QueryProperties {
 
     private static final String DEFAULT_API_KEY = "4f1db7ab46d3b2fbc8c3c383dfee370c";
     private static final String DEFAULT_LANGUAGE = "en";
     private static final String DEFAULT_UNITS = "metric";
+    private final String PREFIX_API_KEY = "appid=";
+    private final String PREFIX_LANGUAGE = "lang=";
+    private final String PREFIX_UNIT_FORMAT = "units=";
     private final File configFile = new File("querySetup.properties");
     private String apiKey;
     private String language;
@@ -41,14 +42,14 @@ public class QueryProperties {
     }
 
     public String getQueryApiKey() {
-        return PREFIX_API_KEY + apiKey;
+        return this.PREFIX_API_KEY + apiKey;
     }
 
     public String getQueryLanguage() {
-        return PREFIX_LANGUAGE + language;
+        return this.PREFIX_LANGUAGE + language;
     }
 
     public String getQueryUnits() {
-        return PREFIX_UNIT_FORMAT + units;
+        return this.PREFIX_UNIT_FORMAT + units;
     }
 }

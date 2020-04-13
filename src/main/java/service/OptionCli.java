@@ -12,15 +12,17 @@ import java.util.List;
 @Data
 public class OptionCli {
     private final String[] arguments;
-    private String dataTime;
     private final CommandLineParser parser;
+    private String dataTime;
     private Options options;
     private CommandLine cmd;
+    private boolean isForecast;
 
     public OptionCli(String[] arguments) {
         this.arguments = arguments;
         this.parser = new DefaultParser();
         this.options = optionsBuild();
+        this.isForecast = false;
         try {
             this.cmd = parser.parse(this.options, this.arguments);
         } catch (ParseException e) {
@@ -35,13 +37,6 @@ public class OptionCli {
                 .longOpt("help")
                 .hasArg(false)
                 .desc("Print this message")
-                .required(false)
-                .build());
-
-        this.options.addOption(Option.builder("C")
-                .longOpt("current")
-                .hasArg(false)
-                .desc("Set this to view the current weather")
                 .required(false)
                 .build());
 
@@ -86,36 +81,26 @@ public class OptionCli {
         formatter.printHelp("Options ", optionsBuild(), true);
     }
 
-    public String optionBuildQuery() {
-        //Current
-        if (cmd.hasOption("C") && cmd.hasOption("c")) {
+    public String optionBuildQuery() throws MissingArgumentException {
+
+        if (cmd.hasOption("F")) {
+            this.dataTime = cmd.getOptionValue("F");
+            this.isForecast = true;
+        }
+
+        if (cmd.hasOption("c")) {
             StringBuilder stringBuilder = new StringBuilder(cmd.getOptionValue("c"));
             for (String arg : cmd.getArgList()) {
                 stringBuilder.append("+").append(arg);
             }
-            return new QueryUrlBuilder("C").buildQueryByNameCity(stringBuilder.toString());
+            return new QueryUrlBuilder(isForecast).buildQueryByNameCity(stringBuilder.toString());
         }
 
-        if (cmd.hasOption("C") && cmd.hasOption("g")) {
+        if (cmd.hasOption("g")) {
             List<String> values = Arrays.asList(cmd.getOptionValues("g"));
-            return new QueryUrlBuilder("C").buildQueryByCoord(values.get(0), values.get(1));
+            return new QueryUrlBuilder(isForecast).buildQueryByCoord(values.get(0), values.get(1));
         }
 
-        //Forecast
-        if (cmd.hasOption("F") && cmd.hasOption("c")) {
-            this.dataTime = cmd.getOptionValue("F");
-            StringBuilder stringBuilder = new StringBuilder(cmd.getOptionValue("c"));
-            for (String arg : cmd.getArgList()) {
-                stringBuilder.append("+").append(arg);
-            }
-            return new QueryUrlBuilder("F").buildQueryByNameCity(stringBuilder.toString());
-        }
-
-        if (cmd.hasOption("F") && cmd.hasOption("g")) {
-            this.dataTime = cmd.getOptionValue("F");
-            List<String> values = Arrays.asList(cmd.getOptionValues("g"));
-            return new QueryUrlBuilder("F").buildQueryByCoord(values.get(0), values.get(1));
-        }
-        return Arrays.toString(this.arguments);
+        throw new MissingArgumentException("Missing argument ");
     }
 }
