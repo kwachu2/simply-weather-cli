@@ -26,10 +26,10 @@ $ java -jar simply-weather-cli-0.0.1.jar -h
 | Option | Arguments | Necessary combination | Description |
 | ------ | ------ | ------ | ------ |
 | -h, --help | no arguments | no options | Display help menu 
-| -F, --forecast  | no arguments | -c, --city OR -g, --geo | Set to print available forecast dates and times
-| -F, --forecast  | < "yyyy-MM-dd HH:mm:ss" > | -c, --city OR -g, --geo| Set this to view the forecast
-| -c, --city | < city name > |no options OR -F, --forecast |Enter the name of the city you are looking for
-| -g, --geo | < latitude longitude > |no options OR -F, --forecast| Set to search by geographic coordinates
+| -F, --forecast  | no arguments | -c OR -g| Set to print available forecast dates and times
+| -F, --forecast  | < "yyyy-MM-dd HH:mm:ss" > | -c OR -g| Set this to view the forecast
+| -c, --city | < city name > |no options OR -F |Enter the name of the city you are looking for
+| -g, --geo | < latitude longitude > |no options OR -F| Set to search by geographic coordinates
 
 ### Examples  
 - ```java -jar simply-weather-cli-0.0.1.jar -c Warsaw```  
