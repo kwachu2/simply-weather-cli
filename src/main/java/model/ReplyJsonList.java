@@ -1,19 +1,21 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import java.util.List;
 
 @Data
 public class ReplyJsonList {
     private long dt;
-    private MainModel main;
+    private ReplyJsonMain main;
     private List<Weather> weather;
     private Clouds clouds;
     private Wind wind;
     private Rain rain;
     private Snow snow;
     private Sys sys;
-    private String dt_txt;
+    @JsonProperty("dt_txt")
+    private String dtTxt;
 
     @Override
     public String toString() {
@@ -30,6 +32,6 @@ public class ReplyJsonList {
                 + this.getSnow()
                 + "\n"
                 + "\tUTC = "
-                + this.getDt_txt() + "\n";
+                + this.getDtTxt() + "\n";
     }
 }

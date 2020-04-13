@@ -5,11 +5,11 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ResponseModel {
+public class Response {
     private Coord coord;
     private List<Weather> weather;
     private String base;
-    private MainModel main;
+    private ReplyJsonMain main;
     private int visibility;
     private Wind wind;
     private Rain rain;

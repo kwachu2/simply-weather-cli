@@ -6,7 +6,7 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.extern.slf4j.Slf4j;
-import model.ResponseModel;
+import model.Response;
 import service.OptionCli;
 import service.PrintWeather;
 
@@ -26,12 +26,12 @@ public class Main {
                 System.out.println(queryUrl);
                 ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
                 HttpResponse<JsonNode> httpResponse = Unirest.get(queryUrl).asJson();
-                ResponseModel responseModel = mapper.readValue(httpResponse.getRawBody(), ResponseModel.class);
-                PrintWeather printWeather = new PrintWeather(responseModel);
+                Response response = mapper.readValue(httpResponse.getRawBody(), Response.class);
+                PrintWeather printWeather = new PrintWeather(response);
 
                 if (optionCli.getDataTime() != null) {
                     printWeather.printWeatherForDateTime(optionCli.getDataTime());
-                } else if (responseModel.getReplyJsonList() != null) {
+                } else if (response.getReplyJsonList() != null) {
                     printWeather.printAvailableForecastDateTimes();
                 } else {
                     printWeather.printCurrentWeather();
