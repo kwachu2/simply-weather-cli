@@ -17,12 +17,12 @@ public class ReplyJsonMain {
     private double humidity;
 
     @JsonProperty("sea_level")
-    private double seaLevel; //coord version
+    private double seaLevelCoord;
     @JsonProperty("grnd_level")
-    private double grndLevel; //coord version
+    private double grndLevelCoord;
 
     @JsonProperty("temp_kf")
-    private double tempKf; //forecast version
+    private double tempKfForecast;
 
     public String toString() {
         return "\n\tTemperature = " + this.getTemp()
@@ -31,8 +31,8 @@ public class ReplyJsonMain {
                 + "\n \tTemp max = " + this.getTempMax()
                 + "\n \tPressure = " + this.getPressure()
                 + "\n \tHumidity = " + this.getHumidity()
-                + "\n \tPressure on the sea level = " + this.getSeaLevel()
-                + "\n \tPressure on the ground level = " + this.getGrndLevel()
-                + "\n \ttemp_kf = " + this.getTempKf();
+                + "\n \tPressure on the sea level = " + this.getSeaLevelCoord()
+                + "\n \tPressure on the ground level = " + this.getGrndLevelCoord()
+                + "\n \ttemp_kf = " + this.getTempKfForecast();
     }
 }

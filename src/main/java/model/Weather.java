@@ -6,7 +6,7 @@ import lombok.Data;
 public class Weather {
     private int id;
     private String main;
-    private String description; //to print
+    private String description;
     private String icon;
 
     @Override

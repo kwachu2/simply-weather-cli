@@ -1,6 +1,5 @@
 package service;
 
-import model.FormatDate;
 import model.ReplyJsonList;
 import model.Response;
 
@@ -20,7 +19,7 @@ public class PrintWeather {
 
     private void printWeatherForDateTime(String dateTime) {
         for (ReplyJsonList search : this.response.getReplyJsonList()) {
-            if (FormatDate.unixToLocalDateString(search.getDt()).equals(dateTime)) {
+            if (FormatDate.unixToLocalDateAndTimeString(search.getDt()).equals(dateTime)) {
                 System.out.println(search.toString() + this.response.getCity());
             }
         }
@@ -28,7 +27,7 @@ public class PrintWeather {
 
     private void printAvailableForecastDateTimes() {
         for (ReplyJsonList search : this.response.getReplyJsonList()) {
-            System.out.println(FormatDate.unixToLocalDateString(search.getDt()));
+            System.out.println(FormatDate.unixToLocalDateAndTimeString(search.getDt()));
         }
     }
 

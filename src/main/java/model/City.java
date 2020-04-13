@@ -1,6 +1,7 @@
 package model;
 
 import lombok.Data;
+import service.FormatDate;
 
 @Data
 public class City {

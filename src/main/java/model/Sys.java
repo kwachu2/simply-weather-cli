@@ -1,6 +1,8 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import service.FormatDate;
 
 @Data
 public class Sys {
@@ -11,7 +13,8 @@ public class Sys {
     private long sunrise;
     private long sunset;
 
-    private String pod; //forecast version
+    @JsonProperty("pod")
+    private String podForecast;
 
     public String toString() {
         return "\n\tCountry = " + this.getCountry()

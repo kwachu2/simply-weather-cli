@@ -2,6 +2,7 @@ package model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import service.FormatDate;
 
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class Response {
                 + this.getWind()
                 + this.getRain()
                 + this.getClouds()
-                + "\n\tDate Time = " + FormatDate.unixToLocalDateString(this.getDt())
+                + "\n\tDate Time = " + FormatDate.unixToLocalDateAndTimeString(this.getDt())
                 + this.getSys()
                 + "\n\tTimezone = " + this.getTimezone()
                 + "\n\tCity name = " + this.getName();

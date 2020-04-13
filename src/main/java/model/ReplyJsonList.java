@@ -2,6 +2,7 @@ package model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import service.FormatDate;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class ReplyJsonList {
     @Override
     public String toString() {
         return "Date: "
-                + FormatDate.unixToLocalDateString(this.getDt())
+                + FormatDate.unixToLocalDateAndTimeString(this.getDt())
                 + this.getMain()
                 + "\n"
                 + this.getWeather().get(0)
