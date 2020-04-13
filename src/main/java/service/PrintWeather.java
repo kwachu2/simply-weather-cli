@@ -1,24 +1,24 @@
 package service;
 
-import lombok.Data;
 import model.FormatDate;
 import model.ReplyJsonList;
 import model.Response;
 
-@Data
 public class PrintWeather {
 
     private final Response response;
+    private final OptionCli optionCli;
 
-    public PrintWeather(Response response) {
+    public PrintWeather(OptionCli optionCli, Response response) {
+        this.optionCli = optionCli;
         this.response = response;
     }
 
-    public void printCurrentWeather() {
+    private void printCurrentWeather() {
         System.out.println(this.response);
     }
 
-    public void printWeatherForDateTime(String dateTime) {
+    private void printWeatherForDateTime(String dateTime) {
         for (ReplyJsonList search : this.response.getReplyJsonList()) {
             if (FormatDate.unixToLocalDateString(search.getDt()).equals(dateTime)) {
                 System.out.println(search.toString() + this.response.getCity());
@@ -26,10 +26,22 @@ public class PrintWeather {
         }
     }
 
-    public void printAvailableForecastDateTimes() {
+    private void printAvailableForecastDateTimes() {
         for (ReplyJsonList search : this.response.getReplyJsonList()) {
             System.out.println(FormatDate.unixToLocalDateString(search.getDt()));
         }
+    }
+
+    public void print() {
+
+        if (optionCli.getDataTime() != null) {
+            printWeatherForDateTime(optionCli.getDataTime());
+        } else if (response.getReplyJsonList() != null) {
+            printAvailableForecastDateTimes();
+        } else {
+            printCurrentWeather();
+        }
+
     }
 
 }
