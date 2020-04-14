@@ -8,27 +8,26 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.extern.slf4j.Slf4j;
 import model.Response;
-import org.apache.commons.cli.MissingArgumentException;
 
 import java.io.IOException;
 
 @Slf4j
 public class HttpWeatherClient {
 
-    private final OptionCli optionCli;
+    private final String queryUrl;
 
-    public HttpWeatherClient(OptionCli optionCli) {
-        this.optionCli = optionCli;
+    public HttpWeatherClient(String queryUrl) {
+        this.queryUrl = queryUrl;
     }
 
     public Response getWeather() {
         ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
         HttpResponse<JsonNode> httpResponse = null;
         try {
-            httpResponse = Unirest.get(optionCli.optionBuildQuery()).asJson();
+            httpResponse = Unirest.get(queryUrl).asJson();
             Response response = mapper.readValue(httpResponse.getRawBody(), Response.class);
             return response;
-        } catch (IOException | UnirestException | MissingArgumentException e) {
+        } catch (IOException | UnirestException e) {
             log.info("Invalid or incomplete parameters. \n\tFor help, type -h or --help");
         }
         throw new NullPointerException();

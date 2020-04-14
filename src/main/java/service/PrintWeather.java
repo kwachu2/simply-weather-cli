@@ -6,18 +6,16 @@ import model.Response;
 public class PrintWeather {
 
     private final Response response;
-    private final OptionCli optionCli;
 
-    public PrintWeather(OptionCli optionCli, Response response) {
-        this.optionCli = optionCli;
+    public PrintWeather(Response response) {
         this.response = response;
     }
 
-    private void printCurrentWeather() {
+    public void printCurrentWeather() {
         System.out.println(this.response);
     }
 
-    private void printWeatherForDateTime(String dateTime) {
+    public void printWeatherForDateTime(String dateTime) {
         for (ReplyJsonList search : this.response.getReplyJsonList()) {
             if (FormatDate.unixToLocalDateAndTimeString(search.getDt()).equals(dateTime)) {
                 System.out.println(search.toString() + this.response.getCity());
@@ -25,22 +23,9 @@ public class PrintWeather {
         }
     }
 
-    private void printAvailableForecastDateTimes() {
+    public void printAvailableForecastDateTimes() {
         for (ReplyJsonList search : this.response.getReplyJsonList()) {
             System.out.println(FormatDate.unixToLocalDateAndTimeString(search.getDt()));
         }
     }
-
-    public void print() {
-
-        if (optionCli.getDataTime() != null) {
-            printWeatherForDateTime(optionCli.getDataTime());
-        } else if (response.getReplyJsonList() != null) {
-            printAvailableForecastDateTimes();
-        } else {
-            printCurrentWeather();
-        }
-
-    }
-
 }
