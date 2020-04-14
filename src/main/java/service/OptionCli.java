@@ -31,16 +31,16 @@ public class OptionCli {
     }
 
     private Options optionsBuild() {
-        options = new Options();
+        Options optionsToReturn = new Options();
 
-        this.options.addOption(Option.builder("h")
+        optionsToReturn.addOption(Option.builder("h")
                 .longOpt("help")
                 .hasArg(false)
                 .desc("Print this message")
                 .required(false)
                 .build());
 
-        this.options.addOption(Option.builder("F")
+        optionsToReturn.addOption(Option.builder("F")
                 .longOpt("forecast")
                 .argName(" \"yyyy-MM-dd HH:mm:ss\" ")
                 .hasArg(true)
@@ -49,7 +49,7 @@ public class OptionCli {
                 .required(false)
                 .build());
 
-        this.options.addOption(Option.builder("c")
+        optionsToReturn.addOption(Option.builder("c")
                 .longOpt("city")
                 .argName(" name ")
                 .hasArg(true)
@@ -57,7 +57,7 @@ public class OptionCli {
                 .required(false)
                 .build());
 
-        this.options.addOption(Option.builder("g")
+        optionsToReturn.addOption(Option.builder("g")
                 .longOpt("geo")
                 .argName(" latitude longitude ")
                 .hasArg(true)
@@ -66,7 +66,7 @@ public class OptionCli {
                 .required(false)
                 .build());
 
-        return options;
+        return optionsToReturn;
     }
 
     public void printHelp() {
@@ -101,6 +101,6 @@ public class OptionCli {
             return new QueryUrlBuilder(isForecast).buildQueryByCoord(values.get(0), values.get(1));
         }
 
-        throw new MissingArgumentException("Missing argument ");
+        throw new MissingArgumentException("Missing argument <>");
     }
 }

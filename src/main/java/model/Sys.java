@@ -2,7 +2,7 @@ package model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import service.FormatDate;
+import utils.FormatDate;
 
 @Data
 public class Sys {

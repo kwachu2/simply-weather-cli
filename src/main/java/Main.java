@@ -26,8 +26,8 @@ public class Main {
                 } else {
                     printWeather.printCurrentWeather();
                 }
-            } catch (NullPointerException | MissingArgumentException e) {
-                log.info("No data to display");
+            } catch (MissingArgumentException | IllegalStateException e) {
+                log.error(e.getMessage());
             }
         }
     }

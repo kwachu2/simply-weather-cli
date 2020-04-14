@@ -38,7 +38,7 @@ will display the current weather for Warsaw.
 will display the current weather for Warsaw, but the search will be based on geographical coordinates.  
 - ```java -jar simply-weather-cli-0.0.1.jar -F -c Warsaw```  
 will print out available dates and times of forecasts for Warsaw.  
-- ```java -jar simply-weather-cli-0.0.1.jar -F "2020-04-12 23:00:00" -c Warsaw```  
+- ```java -jar simply-weather-cli-0.0.1.jar -F "2020.04.12 23.00.00" -c Warsaw```  
 will display the forecast for the given available date and time for Warsaw.  
 
 ## The app was build with

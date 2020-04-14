@@ -2,7 +2,7 @@ package model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import service.FormatDate;
+import utils.FormatDate;
 
 import java.util.List;
 
@@ -23,7 +23,6 @@ public class Response {
     private String name;
     private int cod;
 
-    //Forecast
     private String message;
     private int cnt;
     @JsonProperty("list")

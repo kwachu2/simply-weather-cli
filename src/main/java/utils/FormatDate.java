@@ -1,10 +1,10 @@
-package service;
+package utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FormatDate {
-    public static final SimpleDateFormat formatterDateAndTime = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss");
+    public static final SimpleDateFormat formatterDateAndTime = new SimpleDateFormat("yyyy.MM.dd HH.mm.ss");
     public static final SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm:ss");
 
     public static String unixToLocalDateAndTimeString(Long dt) {

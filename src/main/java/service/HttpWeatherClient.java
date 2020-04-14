@@ -28,8 +28,7 @@ public class HttpWeatherClient {
             Response response = mapper.readValue(httpResponse.getRawBody(), Response.class);
             return response;
         } catch (IOException | UnirestException e) {
-            log.info("Invalid or incomplete parameters. \n\tFor help, type -h or --help");
+            throw new IllegalStateException("Invalid or incomplete parameters. \n\tFor help, type -h or --help");
         }
-        throw new NullPointerException();
     }
 }
