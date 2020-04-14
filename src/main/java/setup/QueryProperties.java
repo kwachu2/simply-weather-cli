@@ -38,7 +38,6 @@ public class QueryProperties {
         properties.load(fileInputStream);
         fileInputStream.close();
         return properties;
-
     }
 
     public String getQueryApiKey() {
