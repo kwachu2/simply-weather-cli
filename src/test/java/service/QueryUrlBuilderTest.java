@@ -10,15 +10,14 @@ class QueryUrlBuilderTest {
     void queryBaseCurrent() {
 
         //given
-        StringBuilder stringBuilderExpected = new StringBuilder("https://api.openweathermap.org/data/2.5/weather?appid=4f1db7ab46d3b2fbc8c3c383dfee370c&units=metric&lang=pl&");
+        String expectedUrl = "https://api.openweathermap.org/data/2.5/weather?appid=4f1db7ab46d3b2fbc8c3c383dfee370c&units=metric&lang=pl&";
         QueryUrlBuilder queryUrlBuilder = new QueryUrlBuilder(false);
 
         //when
-        String stringBuilderExpectedToString = stringBuilderExpected.toString();
         String queryBuilderExpectedToString = queryUrlBuilder.queryBase().toString();
 
         //then
-        assertEquals(stringBuilderExpectedToString, queryBuilderExpectedToString);
+        assertEquals(expectedUrl, queryBuilderExpectedToString);
     }
 
     @Test
@@ -53,15 +52,14 @@ class QueryUrlBuilderTest {
     void queryBaseForecast() {
 
         //given
-        StringBuilder stringBuilderExpected = new StringBuilder("https://api.openweathermap.org/data/2.5/forecast?appid=4f1db7ab46d3b2fbc8c3c383dfee370c&units=metric&lang=pl&");
+        String expectedUrl = "https://api.openweathermap.org/data/2.5/forecast?appid=4f1db7ab46d3b2fbc8c3c383dfee370c&units=metric&lang=pl&";
         QueryUrlBuilder queryUrlBuilder = new QueryUrlBuilder(true);
 
         //when
-        String stringBuilderExpectedToString = stringBuilderExpected.toString();
         String queryBuilderExpectedToString = queryUrlBuilder.queryBase().toString();
 
         //then
-        assertEquals(stringBuilderExpectedToString, queryBuilderExpectedToString);
+        assertEquals(expectedUrl, queryBuilderExpectedToString);
     }
 
     @Test
