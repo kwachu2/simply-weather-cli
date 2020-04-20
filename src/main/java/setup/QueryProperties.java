@@ -1,11 +1,13 @@
 package setup;
 
+import model.Printable;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class QueryProperties {
+public class QueryProperties implements Printable {
 
     private static final String DEFAULT_API_KEY = "4f1db7ab46d3b2fbc8c3c383dfee370c";
     private static final String DEFAULT_LANGUAGE = "en";
@@ -50,5 +52,10 @@ public class QueryProperties {
 
     public String getQueryUnits() {
         return this.PREFIX_UNIT_FORMAT + units;
+    }
+
+    @Override
+    public String toPrint() {
+        return "Units: " + this.units + "\tLanguage: " + this.language;
     }
 }

@@ -3,11 +3,12 @@ package model;
 import lombok.Data;
 
 @Data
-public class Coord {
+public class Coord implements Printable {
     private double lon;
     private double lat;
 
-    public String toString() {
+    @Override
+    public String toPrint() {
         return "\n\tGeo coords:"
                 + "\n\t\tlongitude = "
                 + this.getLon()

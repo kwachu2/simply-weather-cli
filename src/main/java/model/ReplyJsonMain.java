@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class ReplyJsonMain {
+public class ReplyJsonMain implements Printable {
 
     private double temp;
     @JsonProperty("feels_like")
@@ -24,7 +24,8 @@ public class ReplyJsonMain {
     @JsonProperty("temp_kf")
     private double tempKfForecast;
 
-    public String toString() {
+    @Override
+    public String toPrint() {
         return "\n\tTemperature = " + this.getTemp()
                 + "\n \tFeels like = " + this.getFeelsLike()
                 + "\n \tTemp min = " + this.getTempMin()

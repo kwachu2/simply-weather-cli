@@ -7,7 +7,7 @@ import utils.FormatDate;
 import java.util.List;
 
 @Data
-public class ReplyJsonList {
+public class ReplyJsonList implements Printable {
     private long dt;
     private ReplyJsonMain main;
     private List<Weather> weather;
@@ -19,21 +19,39 @@ public class ReplyJsonList {
     @JsonProperty("dt_txt")
     private String dtTxt;
 
+
+    private String getRainToPrint() {
+        if (this.rain == null) {
+            return "no rain";
+        } else {
+            return this.rain.toPrint();
+        }
+    }
+
+    private String getSnowToPrint() {
+        if (this.rain == null) {
+            return "no snow";
+        } else {
+            return this.snow.toPrint();
+        }
+    }
+
     @Override
-    public String toString() {
+    public String toPrint() {
         return "Date: "
                 + FormatDate.unixToLocalDateAndTimeString(this.getDt())
-                + this.getMain()
+                + this.getMain().toPrint()
                 + "\n"
-                + this.getWeather().get(0)
-                + this.getClouds()
-                + this.getWind()
+                + this.getWeather().get(0).toPrint()
+                + this.getClouds().toPrint()
+                + this.getWind().toPrint()
                 + "\n\tRain: "
-                + this.getRain() // check null value
+                + getRainToPrint()
                 + "\n\tSnow: "
-                + this.getSnow()
+                + getSnowToPrint()
                 + "\n"
                 + "\tUTC = "
                 + this.getDtTxt() + "\n";
     }
+
 }

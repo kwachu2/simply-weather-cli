@@ -7,7 +7,7 @@ import utils.FormatDate;
 import java.util.List;
 
 @Data
-public class Response {
+public class Response implements Printable {
     private Coord coord;
     private List<Weather> weather;
     private String base;
@@ -30,18 +30,29 @@ public class Response {
     private City city;
 
 
-    public String toString() {
-        return "ResponseModel: "
-                + this.getCoord()
-                + this.getWeather().get(0)
-                + this.getMain()
+    private String getRainToPrint() {
+        if (this.rain == null) {
+            return "no rain";
+        } else {
+            return this.rain.toPrint();
+        }
+    }
+
+    @Override
+    public String toPrint() {
+        return "Current weather for " + this.getName()
+                + this.getCoord().toPrint()
+                + this.getWeather().get(0).toPrint()
+                + this.getMain().toPrint()
                 + "\n\tVisibility = " + this.getVisibility()
-                + this.getWind()
-                + this.getRain()
-                + this.getClouds()
+                + this.getWind().toPrint()
+                + "\n\tRain: "
+                + getRainToPrint()
+                + this.getClouds().toPrint()
                 + "\n\tDate Time = " + FormatDate.unixToLocalDateAndTimeString(this.getDt())
-                + this.getSys()
+                + this.getSys().toPrint()
                 + "\n\tTimezone = " + this.getTimezone()
                 + "\n\tCity name = " + this.getName();
     }
+
 }

@@ -5,7 +5,7 @@ import lombok.Data;
 import utils.FormatDate;
 
 @Data
-public class Sys {
+public class Sys implements Printable {
     private int type;
     private int id;
     private double message;
@@ -16,7 +16,8 @@ public class Sys {
     @JsonProperty("pod")
     private String podForecast;
 
-    public String toString() {
+    @Override
+    public String toPrint() {
         return "\n\tCountry = " + this.getCountry()
                 + "\n\tSunrise = " + FormatDate.unixToLocalTimeString(this.getSunrise())
                 + "\n\tSunset = " + FormatDate.unixToLocalTimeString(this.getSunset());

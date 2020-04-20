@@ -3,12 +3,13 @@ package model;
 import lombok.Data;
 
 @Data
-public class Wind {
+public class Wind implements Printable {
     private double speed;
     private int deg;
     private double gust;
 
-    public String toString() {
+    @Override
+    public String toPrint() {
         return "\n\tWind: "
                 + "\n\t\tspeed = " + this.getSpeed()
                 + "\n\t\tdirection = " + this.getDeg()

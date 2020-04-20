@@ -3,10 +3,11 @@ package model;
 import lombok.Data;
 
 @Data
-public class Clouds {
+public class Clouds implements Printable {
     private double all;
 
-    public String toString() {
+    @Override
+    public String toPrint() {
         return "\n\tCloudiness(%) = " + this.getAll();
     }
 }
