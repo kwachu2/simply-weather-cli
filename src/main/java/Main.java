@@ -15,6 +15,7 @@ public class Main {
             optionCli.printHelp();
         } else {
             try {
+                System.out.println(optionCli.optionBuildQuery());
                 HttpWeatherClient httpWeatherClient = new HttpWeatherClient(optionCli.optionBuildQuery());
                 Response response = httpWeatherClient.getWeather();
                 PrintWeather printWeather = new PrintWeather(response);

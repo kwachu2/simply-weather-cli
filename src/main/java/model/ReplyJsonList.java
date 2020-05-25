@@ -29,7 +29,7 @@ public class ReplyJsonList implements Printable {
     }
 
     private String getSnowToPrint() {
-        if (this.rain == null) {
+        if (this.snow == null) {
             return "no snow";
         } else {
             return this.snow.toPrint();
