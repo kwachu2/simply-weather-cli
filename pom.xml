@@ -57,7 +57,7 @@
         <maven-jar-plugin>3.2.0</maven-jar-plugin>
         <maven-dependency-plugin>2.10</maven-dependency-plugin>
         <unirest-java>1.4.9</unirest-java>
-        <jackson-databind.version>2.10.2</jackson-databind.version>
+        <jackson-databind.version>2.12.6.1</jackson-databind.version>
         <lombok.version>1.18.12</lombok.version>
         <slf4j.version>1.7.30</slf4j.version>
         <commons-cli.version>1.4</commons-cli.version>
